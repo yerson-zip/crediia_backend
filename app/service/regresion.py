@@ -51,7 +51,6 @@ def processing_data_file(file_path:UploadFile):
     df["loan_assets_ratio"] = df["loan_amount"] / (df["total_assets"] + 1e-6)
 
     df = df.reindex(columns=COLUMNAS, fill_value=0)
-
     X = scaler.transform(df)
 
     df["prediction"] = model.predict(X)
