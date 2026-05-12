@@ -1,7 +1,7 @@
 from fastapi import  UploadFile, HTTPException, APIRouter
 from app.schemas.Data import DataIn
 
-from app.service.red_neuronal import processing_data, processing_data_file
+from app.service.red_neuronal import processing_data, processing_data_file, evaluate_file
 
 router = APIRouter(tags=["Red neuronal"], prefix="/NN")
 
@@ -20,3 +20,7 @@ def predict_regresion_path(file:UploadFile):
         raise HTTPException(status_code=404, detail=response["Message"])
 
     return response
+
+@router.post("/evaluate")
+async  def evaluate(file:UploadFile ):
+    return evaluate_file(file)

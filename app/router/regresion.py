@@ -1,7 +1,7 @@
 from fastapi import  UploadFile, HTTPException, APIRouter
 from app.schemas.Data import DataIn
 
-from app.service.regresion import processing_data, processing_data_file
+from app.service.regresion import processing_data, processing_data_file, evaluate_file
 
 router = APIRouter(tags=["Regresion"], prefix="/regresion")
 
@@ -16,3 +16,7 @@ def predict_regresion(data:DataIn):
 def predict_regresion_path(file:UploadFile):
     response = processing_data_file(file)
     return response
+
+@router.post("/evaluate")
+async  def evaluate(file:UploadFile ):
+    return evaluate_file(file)
